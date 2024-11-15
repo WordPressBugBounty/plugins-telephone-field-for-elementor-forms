@@ -1,8 +1,8 @@
 === Telephone field for Elementor Forms ===
-Contributors: rednumber,addonpro
+Contributors: addonsorg
 Tags: Elementor Forms, Phone field, Elementor Forms Phone, Phone form, Telephone field
 Requires at least: 2.0
-Tested up to: 6.6.2
+Tested up to: 6.7
 Stable tag: 1.4.8
 Requires PHP: 5.2
 License: GPLv2 or later
