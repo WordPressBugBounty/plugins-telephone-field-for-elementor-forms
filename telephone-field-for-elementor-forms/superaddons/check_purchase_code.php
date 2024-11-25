@@ -80,7 +80,7 @@ if(!class_exists('Superaddons_Check_Purchase_Code')){
 			}
 			$mylinks = array(
 			        '<div class="rednumber-purchase-container rednumber-purchase-container_form '.$class_1.'">'.esc_html__("Purchase Code:","rednumber").' <input data-id="'.$this->data["id"].'" type="text"><a href="#" class="button button-primary rednumber-active">'.esc_html__("Active","rednumber").'</a></div>
-			         <div class="rednumber-purchase-container rednumber-purchase-container_show '.$class_2.'">Purchased: <span>'.get_option( '_redmuber_item_'.$this->data["id"]."_code" ).'</span> <a data-code="'.get_option( '_redmuber_item_'.$this->data["id"]."_code" ).'" data-id="'.$this->data["id"].'" href="#" class="rednumber-remove">'.esc_html__("Remove","rednumber").'</a></div><a target="_blank" class="'.$class_1.'"  href="'.$this->data["pro"].'" >'.esc_html__("Get pro version","rednumber").'</a>',
+			        <div class="rednumber-purchase-container rednumber-purchase-container_show '.$class_2.'">Purchased: <span>'.get_option( '_redmuber_item_'.$this->data["id"]."_code" ).'</span> <a data-code="'.get_option( '_redmuber_item_'.$this->data["id"]."_code" ).'" data-id="'.$this->data["id"].'" href="#" class="rednumber-remove">'.esc_html__("Remove","rednumber").'</a></div><a target="_blank" class="'.$class_1.'"  href="'.$this->data["pro"].'" >'.esc_html__("Get pro version","rednumber").'</a>',
 			    );
 			$mylinks[] ='<a href="'.$this->data["document"] .'" target="_blank" />Document</a>';
 		    return array_merge( $links, $mylinks );
@@ -92,6 +92,7 @@ if(!class_exists('Superaddons_Check_Purchase_Code')){
 			if( $status == "ok"){
 				update_option( '_redmuber_item_'.$id, "ok" );
 				update_option( '_redmuber_item_'.$id."_code", $code );
+				do_action( "yeeaddons_check_purchase_ok", $id,$code );
 			}
 			echo esc_attr($status);
 			die();
@@ -101,6 +102,7 @@ if(!class_exists('Superaddons_Check_Purchase_Code')){
 			$code = sanitize_text_field($_POST["code"]);
 			delete_option('_redmuber_item_'.$id);
 			delete_option('_redmuber_item_'.$id."_code");
+			do_action( "yeeaddons_check_purchase_remove", $id );
 			$personalToken = "uzAMx8rZ3FRV0ecu8t1pXNWG0d0NA6qL";
 			$userAgent = "Purchase code verification";
 			$ch = curl_init();
