@@ -12,6 +12,7 @@
  * Elementor Pro tested up to: 3.24
  * Author URI: https://add-ons.org/
 */
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 define( 'ELEMENTOR_TELEPHONE_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ELEMENTOR_TELEPHONE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 add_action( 'elementor_pro/forms/fields/register', 'rednumber_add_new_telephone_field' );
