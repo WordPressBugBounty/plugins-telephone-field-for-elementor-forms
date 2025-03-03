@@ -1,4 +1,4 @@
-.wpcf7-not-valid-red {
+.yee-ltr.wpcf7-not-valid-red {
   color: red !important;
   background-image: url("../img/cancel.png")!important;
   background-size:  auto 70% !important;
@@ -6,12 +6,15 @@
   background-position-x: 97% !important;
   background-position-y: center !important;
 }
-.wpcf7-not-valid-blue {
+.yee-ltr.wpcf7-not-valid-blue {
   background-image: url("../img/checked.png")!important;
   background-size:  auto 70% !important;
   background-repeat: no-repeat !important;
   background-position-x: 97% !important;
   background-position-y: center !important;
+} 
+.wpcf7-not-valid-red  {
+  color: red !important;
 }
 .iti--container {
   z-index: 99999 !important;

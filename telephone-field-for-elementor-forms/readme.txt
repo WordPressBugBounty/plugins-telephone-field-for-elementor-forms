@@ -3,7 +3,7 @@ Contributors: addonsorg
 Tags: Elementor Forms, Phone field, Elementor Forms Phone, Phone form, Telephone field
 Requires at least: 2.0
 Tested up to: 6.7
-Stable tag: 1.4.8
+Stable tag: 1.5.0
 Requires PHP: 5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -68,6 +68,9 @@ This is a popup feature of elementor, to fix the error you enable Prevent Closin
 4. Frontend in smartphone Search
 
 == Changelog ==
+= 1.5.0 =
+- Added: Support RTL
+
 = 1.4.8 =
 - Added: Only us phone format
 

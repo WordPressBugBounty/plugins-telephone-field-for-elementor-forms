@@ -329,7 +329,13 @@ class Superaddons_Telephone_Field extends \ElementorPro\Modules\Forms\Fields\Fie
 		}else{
 			$class ="elementor-field-telephone elementor-field-textual";
 		}
-		
+		if( is_rtl() ) {
+			$dir = "rtl";
+			$class .= " yee-rtl";
+		}else{
+			$dir = "ltr";
+			$class .= " yee-ltr";
+		}
 		$form->add_render_attribute( 'input' . $item_index, 'class', $class);
 		$form->add_render_attribute( 'input' . $item_index, 'type', 'text', true );		
 		if ( isset( $item['telephone_auto'] ) ) {
@@ -349,7 +355,7 @@ class Superaddons_Telephone_Field extends \ElementorPro\Modules\Forms\Fields\Fie
 		$form->add_render_attribute( 'input' . $item_index, 'data-telephone_search', $telephone_search );
 		$form->add_render_attribute( 'input' . $item_index, 'name', "change_name_".$item["custom_id"],true );
 		?>
-		<input <?php $form->print_render_attribute_string( 'input' . $item_index ); ?> >
+		<input dir="<?php echo esc_attr($dir) ?>" <?php $form->print_render_attribute_string( 'input' . $item_index ); ?> >
 		<input onkeydown="return /[0-9]|\(|\)|\+|-|BACKSPACE/i.test(event.key)" type="hidden" class="phone_check" name="form_fields[<?php echo esc_attr($item["custom_id"]) ?>_check]" value="" >
 		<?php
 	}
