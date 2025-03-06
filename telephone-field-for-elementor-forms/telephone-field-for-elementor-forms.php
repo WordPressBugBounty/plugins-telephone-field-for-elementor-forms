@@ -3,7 +3,7 @@
  * Plugin Name: Elementor Form International Telephone Input
  * Plugin URI: https://add-ons.org/plugin/elementor-forms-international-phone-input-mask-field/
  * Description: Elementor International Telephone Input easy phone number input
- * Version: 1.5.0
+ * Version: 1.5.1
  * Requires Plugins: elementor
  * Author: add-ons.org
  * Text Domain: elementor-telephone
