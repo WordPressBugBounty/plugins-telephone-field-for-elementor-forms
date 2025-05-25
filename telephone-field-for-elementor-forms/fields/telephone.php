@@ -229,8 +229,9 @@ class Superaddons_Telephone_Field extends \ElementorPro\Modules\Forms\Fields\Fie
 	public function __construct() {
 		parent::__construct();
 		add_action("wp_enqueue_scripts",array($this,"add_lib"),1000);
-		add_action("wp_head",array($this,"wp_head"),1000);
 		add_action( 'elementor/preview/init', array( $this, 'editor_preview_footer' ) );
+		add_filter( "litespeed_media_lazy_img_excludes", array($this,"litespeed_media_lazy_img_excludes"));
+		add_filter( "wp_fastest_cache_exclude_lazyload", array($this,"wp_fastest_cache_exclude_lazyload"));
 	}
 	function add_lib(){
 		wp_enqueue_script("intlTelInput_elementor",ELEMENTOR_TELEPHONE_PLUGIN_URL."lib/js/intlTelInput-jquery.js",array("jquery"));
@@ -239,18 +240,14 @@ class Superaddons_Telephone_Field extends \ElementorPro\Modules\Forms\Fields\Fie
         wp_enqueue_style("intlTelInput",ELEMENTOR_TELEPHONE_PLUGIN_URL."lib/css/intlTelInput.min.css",array());
         wp_enqueue_style("elementor_tel",ELEMENTOR_TELEPHONE_PLUGIN_URL."lib/css/elementor-tel.css",array(),"10.4.7");
 	}
-	function wp_head(){
-		if ( ! function_exists( 'is_plugin_active' ) ){
-			include_once(ABSPATH.'wp-admin/includes/plugin.php');
-		}
-		if(is_plugin_active( 'litespeed-cache/litespeed-cache.php' ) || is_plugin_active( 'wp-fastest-cache/wpFastestCache.php' )){
-			?>
-			<style type="text/css">
-			.iti__flag {
-				background-image: url(https://cdn.add-ons.org/share/flags.png) !important;
-			}
-			</style>
-			<?php
-		}
+	function litespeed_media_lazy_img_excludes($excludes){
+		$excludes[] = 'telephone-field-for-elementor-forms/lib/img/uploads/flags.png';
+		$excludes[] = 'telephone-field-for-elementor-forms/lib/img/uploads/flags@2x.png';
+		return $excludes;
+	}
+	function wp_fastest_cache_exclude_lazyload($excludes){
+		$excludes[] = 'telephone-field-for-elementor-forms/lib/img/uploads/flags.png';
+		$excludes[] = 'telephone-field-for-elementor-forms/lib/img/uploads/flags@2x.png';
+		return $excludes;
 	}
 }

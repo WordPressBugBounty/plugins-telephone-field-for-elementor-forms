@@ -3,7 +3,7 @@
  * Plugin Name: Telephone field for Elementor Forms
  * Plugin URI: https://wordpress.org/plugins/telephone-field-for-elementor-forms/
  * Description: Elementor International Telephone Input easy phone number input
- * Version: 1.5.3
+ * Version: 1.5.4
  * Requires Plugins: elementor
  * Author: add-ons.org
  * Domain Path: /languages
@@ -11,7 +11,7 @@
  * Elementor Pro tested up to: 3.28
  * Author URI: https://add-ons.org/
  * License: GPLv2 or later
- *License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 define( 'ELEMENTOR_TELEPHONE_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
