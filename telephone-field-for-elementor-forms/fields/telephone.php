@@ -228,7 +228,7 @@ class Superaddons_Telephone_Field extends \ElementorPro\Modules\Forms\Fields\Fie
 	}
 	public function __construct() {
 		parent::__construct();
-		add_action("wp_enqueue_scripts",array($this,"add_lib"),1000);
+		add_action("elementor/frontend/after_enqueue_scripts",array($this,"add_lib"),1000);
 		add_action( 'elementor/preview/init', array( $this, 'editor_preview_footer' ) );
 		add_filter( "litespeed_media_lazy_img_excludes", array($this,"litespeed_media_lazy_img_excludes"));
 		add_filter( "wp_fastest_cache_exclude_lazyload", array($this,"wp_fastest_cache_exclude_lazyload"));
@@ -236,7 +236,7 @@ class Superaddons_Telephone_Field extends \ElementorPro\Modules\Forms\Fields\Fie
 	function add_lib(){
 		wp_enqueue_script("intlTelInput_elementor",ELEMENTOR_TELEPHONE_PLUGIN_URL."lib/js/intlTelInput-jquery.js",array("jquery"));
         wp_enqueue_script("elementor_tel",ELEMENTOR_TELEPHONE_PLUGIN_URL."lib/js/elementor_tel.js",array("jquery"));
-        wp_localize_script( 'elementor_tel', 'elementor_tel',array("utilsScript"=>ELEMENTOR_TELEPHONE_PLUGIN_URL."lib/js/utils.js"),);
+        wp_localize_script( 'elementor_tel', 'elementor_tel',array("utilsScript"=>ELEMENTOR_TELEPHONE_PLUGIN_URL."lib/js/utils_new.js"),);
         wp_enqueue_style("intlTelInput",ELEMENTOR_TELEPHONE_PLUGIN_URL."lib/css/intlTelInput.min.css",array());
         wp_enqueue_style("elementor_tel",ELEMENTOR_TELEPHONE_PLUGIN_URL."lib/css/elementor-tel.css",array(),"10.4.7");
 	}

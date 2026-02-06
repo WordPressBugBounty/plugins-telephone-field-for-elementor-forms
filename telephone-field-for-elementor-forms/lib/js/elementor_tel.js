@@ -52,6 +52,7 @@
 				initialCountry_data = "auto";
 			}
 			if( field.data("auto") == "yes" ){
+				initialCountry_data = "auto";
 				var iti = field.intlTelInput({
 					nationalMode: true,
 					countrySearch: countrySearch,

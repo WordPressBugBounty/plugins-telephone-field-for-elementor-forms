@@ -2,8 +2,8 @@
 Contributors: addonsorg
 Tags: Elementor Forms, Phone field, Elementor Forms Phone, Phone form, Telephone field
 Requires at least: 2.0
-Tested up to: 6.8
-Stable tag: 1.5.4
+Tested up to: 6.9
+Stable tag: 1.5.6
 Requires PHP: 5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +15,8 @@ The plugin helps you in creating a country drop-down list with country flag.
 [youtube https://www.youtube.com/watch?v=iGZZrxwV4RQ]
 
 **DEMO**: <https://demo.add-ons.org/demo-international-phone-field/>
+**Pro Version**: <https://add-ons.org/plugin/elementor-forms-international-phone-input-mask-field/>
+**Document**: <https://add-ons.org/document-elementor-forms-international-phone-masking-field/>
 
 The Telephone field for the Elementor Forms plugin helps you in creating a country drop-down list with country flags. The tag field will automatically add countries name in standard drop-down field of Elementor Forms.
 
@@ -36,8 +38,6 @@ It supports all modern browsers and touch based devices.
 * Country Search
 * 30-day money-back guarantee
 * 1-year support
-
-**Download Pro Version**: <https://add-ons.org/plugin/elementor-forms-international-phone-input-mask-field/>
 
 == Installation ==
 **Normal installation**
