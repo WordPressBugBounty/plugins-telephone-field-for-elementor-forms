@@ -1,5 +1,6 @@
 <?php
-if (! defined('ABSPATH')) exit; // Exit if accessed directly
+if (!defined('ABSPATH'))
+    exit; // Exit if accessed directly
 global $yeekit_document_addons;
 //phpcs:disable WordPress.WP.I18n.TextDomainMismatch
 if (!class_exists('Yeekit_Document_Addons')) {
@@ -92,6 +93,9 @@ if (!class_exists('Yeekit_Document_Addons')) {
             );
             $datas = $this->get_addons("elementor");
             $html = '';
+            if (!is_array($datas)) {
+                $datas = [];
+            }
             foreach ($datas as $data) {
                 if (wp_http_validate_url($data["download"])) {
                     $dl = $data["download"];
@@ -100,7 +104,8 @@ if (!class_exists('Yeekit_Document_Addons')) {
                 }
                 $install_url = "";
                 if (isset($data["free"]) && $data["free"] != "") {
-                    $install_url = wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=' . $data["free"]), 'install-plugin_' . $data["free"]);;
+                    $install_url = wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=' . $data["free"]), 'install-plugin_' . $data["free"]);
+                    ;
                 }
                 $class = "";
                 if (isset($data["plugin"]) && $data["plugin"] != "") {
@@ -173,11 +178,14 @@ if (!class_exists('Yeekit_Document_Addons')) {
                             }
                         }
                         if ($check_disable == "") {
-?>
-                            <div class="notice notice-warning is-dismissible yeeaddons-s-dismissible" data-id="<?php echo esc_attr($data["notice_id"]) ?>">
-                                <p><strong><?php echo esc_attr($data["plugin_name"]) ?>: </strong><?php esc_html_e('Upgrade to pro version: ', 'yeekit'); ?> <a href="<?php echo esc_url($data["pro"]) ?>" target="_blank"><?php echo esc_url($data["pro"]) ?></a></p>
+                            ?>
+                            <div class="notice notice-warning is-dismissible yeeaddons-s-dismissible"
+                                data-id="<?php echo esc_attr($data["notice_id"]) ?>">
+                                <p><strong><?php echo esc_attr($data["plugin_name"]) ?>:
+                                    </strong><?php esc_html_e('Upgrade to pro version: ', 'yeekit'); ?> <a
+                                        href="<?php echo esc_url($data["pro"]) ?>" target="_blank"><?php echo esc_url($data["pro"]) ?></a></p>
                             </div>
-                    <?php
+                            <?php
                         }
                     }
                 }
@@ -197,13 +205,13 @@ if (!class_exists('Yeekit_Document_Addons')) {
             wp_enqueue_script('yeekit_list_addons', plugins_url('yeekit.js', __FILE__), array("jquery"), "1.0.0");
             wp_enqueue_style('yeekit_list_addons', plugins_url('yeekit.css', __FILE__), array(), "1.0.0");
             wp_localize_script('yeekit_list_addons', 'yeekit_list_addons', [
-                'nonce'    => wp_create_nonce('yeekit_addons_nonce'),
+                'nonce' => wp_create_nonce('yeekit_addons_nonce'),
             ]);
         }
         function add_menu()
         {
             add_submenu_page("wpcf7", "contact-form-7 addons", "<span style='color:#f18500'>Add-ons </span><span class='update-plugins count-1'><span class='plugin-count'>36</span></span>", "manage_options", "contact-form-7-addons", array($this, 'page_addons_cf7'), 999);
-            add_submenu_page("elementor", "elementor form addons", "<span style='color:#f18500'>Forms Add-ons </span><span class='update-plugins count-1'><span class='plugin-count'>15</span></span>", "manage_options", "elementor-forms-addons", array($this, 'page_addons_elementor'), 999);
+            add_submenu_page("elementor", "Elementor Form ddons", "Forms Add-ons", "manage_options", "elementor-forms-addons", array($this, 'page_addons_elementor'), 999);
             add_submenu_page("fluent_forms", "addons", "<span style='color:#f18500'>Add-ons </span><span class='update-plugins count-1'><span class='plugin-count'>36</span></span>", "manage_options", "fluent_forms-addons", array($this, 'page_addons_fluent_forms'));
             add_submenu_page("formidable", "addons", "<span style='color:#f18500'>Add-ons </span><span class='update-plugins count-1'><span class='plugin-count'>36</span></span>", "manage_options", "formidable-addons", array($this, 'page_addons_formidable'), 999);
             add_submenu_page("quform.dashboard", "addons", "<span style='color:#f18500'>Add-ons </span><span class='update-plugins count-1'><span class='plugin-count'>36</span></span>", "manage_options", "quform.dashboard-addons", array($this, 'page_addons_quform'), 999);
@@ -296,9 +304,9 @@ if (!class_exists('Yeekit_Document_Addons')) {
                             "authorurl" => "https://add-ons.org",
                             "class" => "",
                             "star" => 5,
-                            "starnum" => rand(10, 100),
-                            "downloaded" => rand(100, 1000),
-                            "version" => "2." . rand(10, 100),
+                            "starnum" => wp_rand(10, 100),
+                            "downloaded" => wp_rand(100, 1000),
+                            "version" => "2." . wp_rand(10, 100),
                             "compatible" => "4.0",
                             "date" => gmdate("Y-m-d h:i:sa")
                         );
@@ -317,14 +325,15 @@ if (!class_exists('Yeekit_Document_Addons')) {
                         <?php
                         $datas = $this->get_addons("gravity");
                         foreach ($datas as $data) {
-                        ?>
+                            ?>
                             <div class="add-ons-box">
                                 <img src="<?php echo esc_url($data["img"]) ?>">
                                 <h3><?php echo esc_attr($data["name"]) ?></h3>
                                 <div class="add-ons-box-content">
                                     <p><?php echo esc_attr($data["des"]) ?></p>
                                     <div class="add-ons-box-actions">
-                                        <a href="<?php echo esc_url($data["demo"]) ?>" target="_blank" class="add-ons-box-actions-button-live"><?php esc_html_e("Live Demo", "yeekit") ?></a>
+                                        <a href="<?php echo esc_url($data["demo"]) ?>" target="_blank"
+                                            class="add-ons-box-actions-button-live"><?php esc_html_e("Live Demo", "yeekit") ?></a>
                                         <?php
                                         if (wp_http_validate_url($data["download"])) {
                                             $dl = $data["download"];
@@ -332,13 +341,14 @@ if (!class_exists('Yeekit_Document_Addons')) {
                                             $dl = "https://" . $data["download"];
                                         }
                                         ?>
-                                        <a href="<?php echo esc_url($dl) ?>" target="_blank" class="add-ons-box-actions-button-download"><?php esc_html_e("Download", "yeekit") ?></a>
+                                        <a href="<?php echo esc_url($dl) ?>" target="_blank"
+                                            class="add-ons-box-actions-button-download"><?php esc_html_e("Download", "yeekit") ?></a>
                                     </div>
                                 </div>
                             </div>
                         <?php } ?>
                     </div>
-            <?php
+                    <?php
                     $html = ob_get_clean();
                     $response["body"] = $html . $response["body"];
                     break;
@@ -380,21 +390,24 @@ if (!class_exists('Yeekit_Document_Addons')) {
                 <?php
                 switch ($addon) {
                     case "cf7":
-                ?>
+                        ?>
                         <div class="cf7-container-bundle">
                             <div class="cf7-container-bundle-h">
                                 <p><?php esc_html_e("Having a tough time choosing just a few?", "yeekit") ?></p>
                                 <p><?php esc_html_e("Bundle and save big with $59", "yeekit") ?></p>
                             </div>
-                            <p><?php esc_html_e("This is a special pack including all add-on for contact form 7 issued by us and every released add-on!", "yeekit") ?></p>
+                            <p><?php esc_html_e("This is a special pack including all add-on for contact form 7 issued by us and every released add-on!", "yeekit") ?>
+                            </p>
                             <h3><?php esc_html_e("Save up to 90%", "yeekit") ?></h3>
-                            <p><?php esc_html_e("In fact, purchasing every item singularly you would spend at least $891. Bundle Price – Only $59", "yeekit") ?></p>
-                            <a href="https://add-ons.org/plugin/contact-form-7-add-on-bundle-all-in-one/" target="_blank" class="add-ons-box-actions-button-download"><?php esc_html_e("Get Now", "yeekit") ?></a>
+                            <p><?php esc_html_e("In fact, purchasing every item singularly you would spend at least $891. Bundle Price – Only $59", "yeekit") ?>
+                            </p>
+                            <a href="https://add-ons.org/plugin/contact-form-7-add-on-bundle-all-in-one/" target="_blank"
+                                class="add-ons-box-actions-button-download"><?php esc_html_e("Get Now", "yeekit") ?></a>
                         </div>
-                    <?php
+                        <?php
                         break;
                     case "wpforms":
-                    ?>
+                        ?>
                         <div class="cf7-container-bundle">
                             <div class="cf7-container-bundle-h">
                                 <p><?php esc_html_e("Having a tough time choosing just a few?", "yeekit") ?></p>
@@ -404,13 +417,15 @@ if (!class_exists('Yeekit_Document_Addons')) {
                                 <?php esc_html_e("This is a special pack including all add-on for WPForms issued by us and every released add-on!", "yeekit") ?>
                             </p>
                             <h3><?php esc_html_e("Save up to 80%", "yeekit") ?></h3>
-                            <p><?php esc_html_e("In fact, purchasing every item singularly you would spend at least $250. Bundle Price – Only $49", "yeekit") ?></p>
-                            <a href="https://add-ons.org/plugin/wpforms-add-on-bundle-all-in-one/" target="_blank" class="add-ons-box-actions-button-download"><?php esc_html_e("Get Now", "yeekit") ?></a>
+                            <p><?php esc_html_e("In fact, purchasing every item singularly you would spend at least $250. Bundle Price – Only $49", "yeekit") ?>
+                            </p>
+                            <a href="https://add-ons.org/plugin/wpforms-add-on-bundle-all-in-one/" target="_blank"
+                                class="add-ons-box-actions-button-download"><?php esc_html_e("Get Now", "yeekit") ?></a>
                         </div>
-                    <?php
+                        <?php
                         break;
                     case "elementor":
-                    ?>
+                        ?>
                         <div class="cf7-container-bundle">
                             <div class="cf7-container-bundle-h">
                                 <p><?php esc_html_e("Having a tough time choosing just a few?", "yeekit") ?></p>
@@ -420,10 +435,12 @@ if (!class_exists('Yeekit_Document_Addons')) {
                                 <?php esc_html_e("This is a special pack including all add-on for Elementor Forms issued by us and every released add-on!", "yeekit") ?>
                             </p>
                             <h3><?php esc_html_e("Save up to 85%", "yeekit") ?></h3>
-                            <p><?php esc_html_e("In fact, purchasing every item singularly you would spend at least $350. Bundle Price – Only $49", "yeekit") ?></p>
-                            <a href="https://add-ons.org/plugin/elementor-forms-add-on-bundle-all-in-one/" target="_blank" class="add-ons-box-actions-button-download"><?php esc_html_e("Get Now", "yeekit") ?></a>
+                            <p><?php esc_html_e("In fact, purchasing every item singularly you would spend at least $350. Bundle Price – Only $49", "yeekit") ?>
+                            </p>
+                            <a href="https://add-ons.org/plugin/elementor-forms-add-on-bundle-all-in-one/" target="_blank"
+                                class="add-ons-box-actions-button-download"><?php esc_html_e("Get Now", "yeekit") ?></a>
                         </div>
-                <?php
+                        <?php
                         break;
                 }
                 ?>
@@ -431,14 +448,15 @@ if (!class_exists('Yeekit_Document_Addons')) {
                     <?php
                     $datas = $this->get_addons($addon);
                     foreach ($datas as $data) {
-                    ?>
+                        ?>
                         <div class="add-ons-box">
                             <img src="<?php echo esc_attr($data["img"]) ?>">
                             <h3><?php echo esc_attr($data["name"]) ?></h3>
                             <div class="add-ons-box-content">
                                 <p><?php echo esc_attr($data["des"]) ?></p>
                                 <div class="add-ons-box-actions">
-                                    <a href="<?php echo esc_url($data["demo"]) ?>" target="_blank" class="add-ons-box-actions-button-live"><?php esc_html_e("Live Demo", "yeekit") ?></a>
+                                    <a href="<?php echo esc_url($data["demo"]) ?>" target="_blank"
+                                        class="add-ons-box-actions-button-live"><?php esc_html_e("Live Demo", "yeekit") ?></a>
                                     <?php
                                     if (wp_http_validate_url($data["download"])) {
                                         $dl = $data["download"];
@@ -446,13 +464,14 @@ if (!class_exists('Yeekit_Document_Addons')) {
                                         $dl = "https://" . $data["download"];
                                     }
                                     ?>
-                                    <a href="<?php echo esc_url($dl) ?>" target="_blank" class="add-ons-box-actions-button-download"><?php esc_html_e("Download", "yeekit") ?></a>
+                                    <a href="<?php echo esc_url($dl) ?>" target="_blank"
+                                        class="add-ons-box-actions-button-download"><?php esc_html_e("Download", "yeekit") ?></a>
                                 </div>
                             </div>
                         </div>
                     <?php } ?>
                 </div>
-    <?php
+                <?php
         }
         function get_addons($add_on = null)
         {
@@ -471,7 +490,7 @@ if (!class_exists('Yeekit_Document_Addons')) {
                 if ($yeekit_addons === false) {
                     $rs = wp_remote_get("https://cdn.add-ons.org/plugins.php");
                     $data = $rs['body'];
-                    set_transient("yeekit_addons", $data,  86400);
+                    set_transient("yeekit_addons", $data, 86400);
                     return json_decode($data, true);
                 } else {
                     return json_decode($yeekit_addons, true);
